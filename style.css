@@ -34,7 +34,7 @@ html, body {
 }
 .logo-img2 {
     width: 100%;
-    max-width: 500px; /* limits logo to 250px on large screens */
+    max-width: 450px; /* limits logo to 250px on large screens */
     height: auto;     /* maintains aspect ratio */
     object-fit: contain;
     display: block; 
@@ -42,7 +42,7 @@ html, body {
 }
 .logo-img {
     width: 100%;
-    max-width: 150px; /* limits logo to 250px on large screens */
+    max-width: 130px; /* limits logo to 250px on large screens */
     height: auto;     /* maintains aspect ratio */
     object-fit: contain;
     display: block;   /* removes any extra inline spacing */
@@ -781,7 +781,7 @@ nav h3 {
 }
 
 .swiper-slide {
-    width: 20%;
+    width: 18%;
     border-left: 1px solid #aeadad;
     padding: 0 2vw;
 }
@@ -963,7 +963,7 @@ nav h3 {
   /* padding: 2vw 0; */
   z-index: 10;
   position: relative;
-  padding-top: 45.1vw;
+  padding-top: 44.1vw;
 }
 
 .footer-socials a {
