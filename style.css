@@ -186,6 +186,7 @@ body.invert-mode video,
 body.invert-mode svg,
 body.invert-mode canvas,
 body.invert-mode iframe,
+body.invert-mode #floating-robot,
 body.invert-mode object,
 body.invert-mode embed {
   filter: invert(1) hue-rotate(180deg);
@@ -197,6 +198,7 @@ body.invert-mode #hero-3,
 body.invert-mode #gooey {
   filter: invert(1) hue-rotate(180deg) blur(25px);
 }
+
 
 
 /* NEW: Toggle Button CSS */
@@ -1267,9 +1269,25 @@ body.dark-mode #invertToggle:hover i {
         transform: translate(-10%, 10%) skew(-12deg);
     }
 }
+#floating-robot {
+  position: fixed;
+  bottom: 21px;
+  right: 22px;
+  width: 300px;
+  height: 300px;
+  z-index: 9999;
+  pointer-events: none;
+  /* transition: transform 0.4s ease, opacity 0.4s ease, filter 0.3s ease; */
+  opacity: 1;
+  filter: drop-shadow(0 0 12px rgba(0, 0, 0, 0.128));
+  transform: scale(1.85);
+}
 
-
-
+#floating-robot:hover {
+  transform: scale(1.05) translateY(-8px);
+  opacity: 1;
+  filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.4));
+}
 
 @media (max-width:600px) {
 
