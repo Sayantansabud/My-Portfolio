@@ -15,6 +15,54 @@
     src: url(./NeueHaasDisplayRoman.ttf);
 }
 
+#global-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Outer Ring */
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #FE320A;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, border-color 0.3s;
+  position: absolute;
+}
+
+/* Inner Dot */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #FE320A;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  transition: background-color 0.3s;
+}
+
+/* Hover state (for interactive elements) */
+.hovered .cursor-ring {
+  transform: translate(-50%, -50%) scale(2);
+  border-color: #6f6f6f;
+}
+
+.hovered .cursor-dot {
+  background-color: #ef0a0a;
+}
+
+body {
+  cursor: none;
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -49,10 +97,13 @@ html, body {
 }
 
 
+
+
+
 #page1 {
     min-height: 100vh;
     width: 100%;
-    background-color: #EFEAE3;
+    background-color: #f2f1f0;
     position: relative;
     padding: 0 2vw;
 }
@@ -73,7 +124,7 @@ html {
 
 
 
-
+/* Your existing CSS (cleaned up) */
 #nav-part2 {
     display: flex;
     align-items: center;
@@ -124,6 +175,118 @@ nav h3 {
     display: none;
 }
 
+/* Invert the whole site */
+body.invert-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* Keep images and media normal */
+body.invert-mode img,
+body.invert-mode video,
+body.invert-mode svg,
+body.invert-mode canvas,
+body.invert-mode iframe,
+body.invert-mode object,
+body.invert-mode embed {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.invert-mode #hero-1,
+body.invert-mode #hero-2,
+body.invert-mode #hero-3,
+body.invert-mode #gooey {
+  filter: invert(1) hue-rotate(180deg) blur(25px);
+}
+
+
+/* NEW: Toggle Button CSS */
+#invertToggle {
+    padding: 10px 10px;
+    border: 1px solid #0000003c;
+    border-radius: 50px;
+    background: transparent;
+    color: #f65206d8;
+    font-size: 18px;
+    cursor: pointer ;
+    transition: all ease 0.4s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: auto;
+}
+
+#invertToggle::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(240, 97, 7);
+    left: 0;
+    bottom: -100%;
+    border-radius: 50%;
+    transition: all ease 0.4s;
+}
+
+#invertToggle:hover::after {
+    bottom: 0;
+    border-radius: 0;
+}
+
+#invertToggle i {
+    position: relative;
+    z-index: 9;
+    transition: color ease 0.4s;
+}
+
+#invertToggle:hover i {
+    color: #fff;
+}
+
+#invertToggle:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+#invertToggle:active {
+    transform: scale(0.95);
+}
+
+/* Optional: Dark mode styles */
+body.dark-mode #nav-part2 h4 {
+    border-color: #ffffff3c;
+    color: #ffffffbb;
+}
+
+body.dark-mode #nav-part2 h4::after {
+    background-color: white;
+}
+
+body.dark-mode #nav-part2 h4 a {
+    color: #ffffffbb;
+}
+
+body.dark-mode #nav-part2 h4:hover a {
+    color: #000;
+}
+
+body.dark-mode #invertToggle {
+    border-color: #ffffff3c;
+    color: #ffffffbb;
+}
+
+body.dark-mode #invertToggle::after {
+    background-color: white;
+}
+
+body.dark-mode #invertToggle:hover i {
+    color: #000;
+}
+
+
+
 #center {
     height: 65vh;
     width: 100%;
@@ -153,14 +316,18 @@ nav h3 {
 
 
 
-
-#center h1 {
-    font-size: 10vw;
-    color: #c2bdb6;
-    text-align: right;
-    line-height: 9vw;
-    padding-bottom: 8rem;
+/* Default Light Mode */
+#center h1, 
+#right h1 {
+  font-size: 10vw;
+  color: #1f1f1f;
+  text-align: right;
+  line-height: 9vw;
+  padding-bottom: 8rem;
+  opacity: 22%;
+  
 }
+
 
 #page1 video {
     position: relative;
@@ -239,7 +406,7 @@ nav h3 {
 #page2 {
     min-height: 100vh;
     width: 100%;
-    background-color: #EFEAE3;
+    background-color: #f2f1f0;
     padding: 8vw 0;
     position: relative;
 }
@@ -329,6 +496,7 @@ nav h3 {
   font-family: 'neu', sans-serif;
   width: 80%;
   line-height: auto;
+  
 }
 
 
@@ -337,6 +505,7 @@ nav h3 {
     font-size: 2.8vw;
     width: 70%;
     line-height: 3vw;
+    
 }
 
 #bottom-part2 {
@@ -391,7 +560,7 @@ nav h3 {
 
 #skills-section {
   padding: 5vw 8vw;
-  background-color: #efeae3;
+  background-color: #f2f1f0;
 }
 
 .skills-container {
@@ -465,7 +634,7 @@ nav h3 {
   font-weight: 500;
   overflow: hidden;
   transition: all ease 0.4s;
-  cursor: default;
+  cursor: none;
 }
 
 .tech-item::after {
@@ -550,10 +719,8 @@ nav h3 {
 
 #projects {
   padding: 4rem 8vw;
-  background-color: #EFEAE3;
+  background-color: #f2f1f0;
 }
-
-
 
 .section-title {
   font-family: 'neu', sans-serif;
@@ -563,7 +730,7 @@ nav h3 {
   color: #222;
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* space between box and text */
+  gap: 0.75rem;
 }
 
 .box-indicator {
@@ -571,49 +738,83 @@ nav h3 {
   height: 15px;
   background-color: rgb(246, 108, 10);
   display: inline-block;
-  border-radius: 2px; /* or remove for a sharp square */
+  border-radius: 2px;
 }
 
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 2rem;
+  min-height: 900px; /* Fixed minimum height */
+  position: relative;
+  transition: all 0.4s ease;
 }
 
 .project-card {
-  position: relative; /* make this a reference for absolute child */
+  width: calc(25% - 2rem);
+  height: 420px;
+  position: relative;
   background: white;
   border: 1px solid #ccc;
   border-radius: 16px;
   overflow: hidden;
-  min-height: 400px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
-/* .project-card {
-  background: rgb(255, 255, 255);
-  border: 1px solid #242424;
-  border-radius: 25px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-} */
+
+.project-card.hide {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  position: absolute;
+}
 
 .project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-.project-card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;           /* Keeps image proportionate */
-  object-fit: cover;              /* Ensures image fills the space without stretching */
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  display: block;
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
+.image-wrapper img {
+  width: 100%;
+  display: block;
+  transition: opacity 0.4s ease, transform 0.5s ease;
+  z-index: 1;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 2;
+}
+
+.project-card.hover-effect:hover .image-wrapper::after {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.project-card.hover-effect:hover .image-wrapper img {
+  transform: scale(1.05);
+  opacity: 0.3;
+}
 
 .project-content {
   padding: 1rem 1.5rem;
@@ -630,24 +831,6 @@ nav h3 {
   font-size: 0.85rem;
   color: #444;
 }
-/* .project-btn {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: #d7d7d7;
-  color: #1c1c1c;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.project-btn:hover {
-  background-color: #333;
-  color: #fff;
-} */
 
 .project-btn {
   position: absolute;
@@ -694,42 +877,8 @@ nav h3 {
 .project-btn:hover span {
   color: #fff;
 }
-.github-btn {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #e8e8e8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.3s ease, background 0.3s ease, opacity 0.3s ease;
-  z-index: 2;
-}
 
-.github-btn img {
-  width: 60%;
-  height: 60%;
-  filter: invert(1);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .github-btn {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-
-.github-btn:hover {
-  background-color: #333333;
-  transform: scale(1.1);
-}
-
-/* Behance button hidden by default */
+.github-btn,
 .behance-btn {
   position: absolute;
   bottom: 16px;
@@ -747,31 +896,91 @@ nav h3 {
   z-index: 2;
 }
 
-.behance-btn img {
+.github-btn img{
   width: 60%;
   height: 60%;
-  filter: invert(0); /* optional for white icons */
+  filter: invert(1);
   transition: transform 0.3s ease;
 }
 
-/* Show Behance button on project-card hover */
+.behance-btn img {
+  width: 60%;
+  height: 60%;
+  filter: invert(0);
+  transition: transform 0.3s ease;
+}
+
+
+.project-card:hover .github-btn,
 .project-card:hover .behance-btn {
   opacity: 1;
   pointer-events: auto;
   transform: scale(1);
 }
 
-/* Hover effect on the button itself */
-.behance-btn:hover {
-  background-color: #4c6ef5; /* Behance blue */
+.github-btn:hover {
+  background-color: #333333;
   transform: scale(1.1);
 }
 
+.behance-btn:hover {
+  background-color: #4c6ef5;
+  transform: scale(1.1);
+}
+
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 30px 0;
+}
+
+.filter-btn {
+  position: relative;
+  padding: 10px 22px;
+  border: 1px solid #0000003c;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000bb;
+  background: transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: color 0.4s ease;
+  z-index: 1;
+}
+
+.filter-btn::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  left: 0;
+  bottom: -100%;
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.filter-btn:hover::after {
+  bottom: 0;
+  border-radius: 0;
+}
+
+.filter-btn:hover {
+  color: white;
+}
+
+.filter-btn span {
+  position: relative;
+  z-index: 2;
+}
 
 #page4 {
     height: 70vh;
     width: 100%;
-    background-color: #EFEAE3;
+    background-color: #f2f1f0;
     padding: 10vw 2vw;
 }
 
