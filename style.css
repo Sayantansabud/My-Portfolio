@@ -106,7 +106,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #e36606;
+  background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   z-index: 1001;
@@ -122,20 +122,20 @@ body {
 .alert-dialog-content {
   font-size: 17px;
   margin-bottom: 15px;
-  color: white;
+  color: rgb(31, 31, 31);
 }
 
 .alert-dialog-footer {
   padding: 10px 15px;
   padding-bottom: 0%;
-  border-top: 1.5px solid #dfdfdf;
+  border-top: 1.5px solid #3d3d3d;
   overflow: hidden;
 }
 
 .alert-dialog-button {
   background: none;
   border: none;
-  color: #202020;
+  color: #0b8bdb;
   font-size: 20px;
   cursor: pointer;
   
