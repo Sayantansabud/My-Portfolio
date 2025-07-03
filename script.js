@@ -242,14 +242,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 8. Loader Animation
-  function loaderAnimation() {
-    const loader = document.querySelector("#loader");
-    setTimeout(() => {
-      loader.style.top = "-100%";
-    }, 4200);
-  }
+function showAlert(message = "Make Sure You are using Desktop!") {
+  const mask = document.getElementById("alert-mask");
+  const dialog = document.getElementById("alert-dialog");
+  const content = dialog.querySelector(".alert-dialog-content");
 
+  content.innerText = message;
+  mask.style.display = "block";
+  dialog.style.display = "block";
+}
+
+function closeAlert() {
+  document.getElementById("alert-mask").style.display = "none";
+  document.getElementById("alert-dialog").style.display = "none";
+}
+
+// ✅ Expose to global scope for inline HTML to access
+window.closeAlert = closeAlert;
+window.showAlert = showAlert;
+
+// Example usage after loader
+function loaderAnimation() {
+  const loader = document.querySelector("#loader");
+  setTimeout(() => {
+    loader.style.top = "-100%";
+    showAlert("Make Sure You are using Desktop!");
+  }, 4200);
+}
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -325,8 +344,43 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
+document.querySelectorAll('.project-card').forEach((card) => {
+    card.classList.add('tilted');
+
+    let requestId;
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      // More dramatic rotation
+      const rotateX = -((y - centerY) / centerY) * 15;
+      const rotateY = ((x - centerX) / centerX) * 15;
+
+      // Throttle with requestAnimationFrame
+      if (requestId) cancelAnimationFrame(requestId);
+      requestId = requestAnimationFrame(() => {
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.12)`;
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (requestId) cancelAnimationFrame(requestId);
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+
+
+
+
   // Execute Animations
   swiperAnimation();
   menuAnimation();
   loaderAnimation();
+  
+
 });
